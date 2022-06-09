@@ -1,5 +1,6 @@
 const register = (req, res) => {
-  res.send('register');
+  const { email, password, name } = req.body;
+  console.log(req.body);
 };
 const login = (req, res) => {
   res.send('login');
