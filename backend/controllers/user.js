@@ -1,5 +1,9 @@
 const asyncHandler = require('express-async-handler');
 
+const bcrypt = require('bcryptjs');
+
+const getToken = require('../utils/getToken');
+
 const User = require('../models/userModel');
 
 const registerBcryption = require('../utils/registerBcryption');
@@ -22,6 +26,7 @@ const register = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      token: getToken(user._id),
     });
   } else {
     res.status(400).json({ msg: 'Invalid user data' });
@@ -39,6 +44,7 @@ const login = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      token: getToken(user._id),
     });
   } else {
     res.status(401).json({
