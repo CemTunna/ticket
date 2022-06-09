@@ -29,8 +29,24 @@ const register = asyncHandler(async (req, res) => {
     res.status(400).json({ msg: 'Invalid user data' });
   }
 });
+
 const login = asyncHandler(async (req, res) => {
-  res.send('login');
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  const isPasswordMatch = await bcrypt.compareSync(password, user.password);
+
+  if (user && isPasswordMatch) {
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    });
+  } else {
+    res.status(401).json({
+      msg: 'Wrong credentials',
+    });
+  }
 });
 module.exports = {
   login,
