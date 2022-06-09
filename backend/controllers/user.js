@@ -1,10 +1,11 @@
-const register = (req, res) => {
+const asyncHandler = require('express-async-handler');
+
+const register = asyncHandler(async (req, res) => {
   const { email, password, name } = req.body;
-  console.log(req.body);
-};
-const login = (req, res) => {
+});
+const login = asyncHandler(async (req, res) => {
   res.send('login');
-};
+});
 module.exports = {
   login,
   register,
