@@ -6,6 +6,7 @@ import Form from '../components/form/Form';
 import { makeStyles } from 'tss-react/mui';
 import Title from '../components/ui/Title';
 import Text from '../components/ui/Text';
+import { useAppSelector } from '../state/hooks';
 const useStyles = makeStyles()((theme) => ({
   section: {
     display: 'flex',
@@ -19,6 +20,8 @@ const Register = () => {
   const { form, onChange, onSubmit } = useForm();
   const { confirmPassword, email, name, password } = form;
   const { classes } = useStyles();
+
+  const state = useAppSelector((state) => state.auth);
 
   return (
     <Fragment>

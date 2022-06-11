@@ -27,9 +27,6 @@ const FormItem = ({ item }: Props) => {
         sx={{
           color: 'red',
         }}
-        InputProps={{
-          disableUnderline: true,
-        }}
         className={classes.input}
         id={id}
         name={name}
