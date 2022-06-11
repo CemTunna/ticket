@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Header from './components/ui/Header';
 import './theme/App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   return (
     <React.Fragment>
@@ -20,6 +22,7 @@ const App = () => {
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </React.Fragment>
   );
 };

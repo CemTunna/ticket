@@ -11,6 +11,9 @@ export const muiCache = createCache({
 
 const theme = createTheme({
   palette: {
+    background: {
+      default: '#46344e',
+    },
     primary: {
       light: '#F5F5F5',
       main: '#FAED26',
