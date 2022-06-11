@@ -26,7 +26,8 @@ const useStyles = makeStyles()((theme) => ({
   },
   logo: {
     textDecoration: 'none',
-    fontSize: '20px',
+    letterSpacing: '0.5px',
+    fontSize: '25px',
     color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightBold,
     textTransform: 'uppercase',

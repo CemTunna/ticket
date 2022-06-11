@@ -2,7 +2,10 @@ body,
 html {
   box-sizing: border-box;
 }
-
+.MuiInput-input:-webkit-autofill {
+  transition-delay: 9999s;
+  transition-property: background-color, color;
+}
 .container {
   max-width: 1300px;
   margin: 0 auto;

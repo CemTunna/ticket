@@ -1,11 +1,20 @@
-import { Button, Grid, TextField, Typography } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { Fragment } from 'react';
 import PersonIcon from '@mui/icons-material/Person';
 import useForm from '../hooks/useForm';
 import Form from '../components/form/Form';
 import { makeStyles } from 'tss-react/mui';
 import Title from '../components/ui/Title';
-const useStyles = makeStyles()((theme) => ({}));
+import Text from '../components/ui/Text';
+const useStyles = makeStyles()((theme) => ({
+  section: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '1rem',
+  },
+}));
 const Register = () => {
   const { form, onChange, onSubmit } = useForm();
   const { confirmPassword, email, name, password } = form;
@@ -13,13 +22,12 @@ const Register = () => {
 
   return (
     <Fragment>
-      <section>
+      <section className={classes.section}>
         <Title>
           Register <PersonIcon />
         </Title>
-        <Typography>Create an account</Typography>
+        <Text>Create an account</Text>
       </section>
-
       <section>
         <Form
           formItems={[
