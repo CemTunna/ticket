@@ -1,10 +1,12 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
-import { Link } from 'react-router-dom';
-import { Grid, List, ListItem } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Grid, List, ListItem } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonIcon from '@mui/icons-material/Person';
-import classNames from 'classnames';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { logoutStart, reset } from '../../state/features/auth/authSlice';
+
 const useStyles = makeStyles()((theme) => ({
   header: {
     display: 'flex',
@@ -38,6 +40,18 @@ const useStyles = makeStyles()((theme) => ({
 }));
 const Header = () => {
   const { classes } = useStyles();
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useAppSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logoutStart());
+    dispatch(reset());
+    navigate('/');
+  };
+
   return (
     <header className={classes.header}>
       <Grid>
@@ -46,16 +60,22 @@ const Header = () => {
         </Link>
       </Grid>
       <List className={classes.list}>
-        <ListItem>
-          <Link to='/login' className={classes.listitem}>
-            Login <LoginIcon className={classes.icon} />
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link to='/register' className={classes.listitem}>
-            Register <PersonIcon className={classes.icon} />
-          </Link>
-        </ListItem>
+        {user ? (
+          <Button onClick={handleLogout}>Logout</Button>
+        ) : (
+          <>
+            <ListItem>
+              <Link to='/login' className={classes.listitem}>
+                Login <LoginIcon className={classes.icon} />
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link to='/register' className={classes.listitem}>
+                Register <PersonIcon className={classes.icon} />
+              </Link>
+            </ListItem>
+          </>
+        )}
       </List>
     </header>
   );
