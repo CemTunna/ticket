@@ -1,17 +1,21 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { register } from '../requests/register';
+import { register } from '../requests/auth/register';
 
 function* handleRegister(action: any) {
-  console.log(action);
   try {
-    yield call(register, action.payload);
-    yield put({ type: 'auth/register' });
-  } catch (error) {
-    // yield put({ type: 'SET_TODO_FAILED', message: error.message });
-    console.log('error', error);
+    const response = yield call(register, action.payload);
+    if (response.data) {
+      localStorage.setItem('user', JSON.stringify(response.data));
+      yield put({ type: 'auth/registerSuccess', payload: response.data });
+    }
+  } catch (error: any) {
+    yield put({
+      type: 'auth/registerFailed',
+      payload: error.response.data.error,
+    });
   }
 }
 function* watcherRegisterSaga() {
-  yield takeEvery('auth/registerRequest', handleRegister);
+  yield takeEvery('auth/registerStart', handleRegister);
 }
 export default watcherRegisterSaga;

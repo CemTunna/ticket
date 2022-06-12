@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
-import { registerRequest } from '../state/features/auth/authSlice';
+import { loginRequest, registerStart } from '../state/features/auth/authSlice';
 const useForm = () => {
   const dispatch = useAppDispatch();
   const [form, setForm] = useState({
@@ -16,6 +16,8 @@ const useForm = () => {
   };
   const onSubmit = (e: any) => {
     e.preventDefault();
+
+    // register
     if (
       name.length > 0 &&
       password.length > 0 &&
@@ -29,8 +31,22 @@ const useForm = () => {
         password,
         confirmPassword,
       };
-      dispatch(registerRequest(data));
+      dispatch(registerStart(data));
     }
+    // login
+    // if (
+    //   password.length > 0 &&
+    //   email.length > 0 &&
+    //   name.length === 0 &&
+    //   confirmPassword.length === 0
+    // ) {
+    //   const data = {
+    //     email,
+    //     password,
+    //   };
+    //   dispatch(loginRequest(data));
+    // }
+
     // if () {
     //   toast.error("Passwords don't match");
     // } else {
