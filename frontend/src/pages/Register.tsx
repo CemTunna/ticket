@@ -1,5 +1,5 @@
 import { Button, Grid } from '@mui/material';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import PersonIcon from '@mui/icons-material/Person';
 import useForm from '../hooks/useForm';
 import Form from '../components/form/Form';
@@ -7,6 +7,10 @@ import { makeStyles } from 'tss-react/mui';
 import Title from '../components/ui/Title';
 import Text from '../components/ui/Text';
 import { useAppSelector } from '../state/hooks';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { reset } from '../state/features/auth/authSlice';
+import { useDispatch } from 'react-redux';
 const useStyles = makeStyles()((theme) => ({
   section: {
     display: 'flex',
@@ -21,7 +25,22 @@ const Register = () => {
   const { confirmPassword, email, name, password } = form;
   const { classes } = useStyles();
 
-  const state = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { isError, isLoading, isSuccess, msg, user } = useAppSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(msg);
+    }
+    if (isSuccess || user) {
+      navigate('/');
+    }
+    dispatch(reset());
+  }, [isError, isSuccess, user, msg, dispatch, navigate]);
 
   return (
     <Fragment>

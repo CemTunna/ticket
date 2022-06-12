@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { useAppDispatch } from '../state/hooks';
 import { loginRequest, registerStart } from '../state/features/auth/authSlice';
 const useForm = () => {
   const dispatch = useAppDispatch();

@@ -21,7 +21,7 @@ const App = () => {
           </Routes>
         </div>
       </Router>
-      <ToastContainer />
+      <ToastContainer autoClose={1000} />
     </React.Fragment>
   );
 };

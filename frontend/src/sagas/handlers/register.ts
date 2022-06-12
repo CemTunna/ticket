@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { register } from '../requests/auth/register';
 
-function* handleRegister(action: any) {
+function* handleRegister(action: any): any {
   try {
     const response = yield call(register, action.payload);
     if (response.data) {
@@ -11,7 +11,7 @@ function* handleRegister(action: any) {
   } catch (error: any) {
     yield put({
       type: 'auth/registerFailed',
-      payload: error.response.data.error,
+      payload: error.response.data.msg,
     });
   }
 }
