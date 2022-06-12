@@ -6,11 +6,11 @@ import Form from '../components/form/Form';
 import { makeStyles } from 'tss-react/mui';
 import Title from '../components/ui/Title';
 import Text from '../components/ui/Text';
-import { useAppSelector } from '../state/hooks';
+import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { reset } from '../state/features/auth/authSlice';
-import { useDispatch } from 'react-redux';
+import Loader from '../components/ui/Loader';
 const useStyles = makeStyles()((theme) => ({
   section: {
     display: 'flex',
@@ -26,7 +26,7 @@ const Register = () => {
   const { classes } = useStyles();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { isError, isLoading, isSuccess, msg, user } = useAppSelector(
     (state) => state.auth
@@ -41,7 +41,9 @@ const Register = () => {
     }
     dispatch(reset());
   }, [isError, isSuccess, user, msg, dispatch, navigate]);
-
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <Fragment>
       <section className={classes.section}>
