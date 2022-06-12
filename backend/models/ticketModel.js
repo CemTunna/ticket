@@ -7,7 +7,7 @@ const ticketSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    issueTitle: {
+    issue: {
       type: String,
       required: [true, "Add issue's topic"],
     },
@@ -16,9 +16,9 @@ const ticketSchema = mongoose.Schema(
       required: [true, "Enter issue's description"],
     },
     status: {
-      type: Boolean,
+      type: String,
       required: true,
-      default: false,
+      default: 'new',
       enum: ['closed', 'new', 'open'],
     },
   },

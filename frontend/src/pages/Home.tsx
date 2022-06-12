@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Text from '../components/ui/Text';
 import Title from '../components/ui/Title';
