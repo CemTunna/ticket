@@ -6,7 +6,11 @@ const useStyles = makeStyles()((theme) => ({
   container: {
     marginTop: '1rem',
     padding: '1rem',
-    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '1rem',
   },
 }));
 const Section = ({ children }: ChildrenClassName) => {

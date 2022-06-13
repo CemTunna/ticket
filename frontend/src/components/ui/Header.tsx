@@ -22,8 +22,6 @@ const useStyles = makeStyles()((theme) => ({
   list: {
     display: 'flex',
     letterSpacing: '0.5px',
-
-    [theme.breakpoints.down('sm')]: {},
   },
   listitem: {
     display: 'flex',

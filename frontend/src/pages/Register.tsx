@@ -11,15 +11,8 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { reset } from '../state/features/auth/authSlice';
 import Loader from '../components/ui/Loader';
-const useStyles = makeStyles()((theme) => ({
-  section: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '1rem',
-  },
-}));
+import Section from '../components/ui/Section';
+const useStyles = makeStyles()((theme) => ({}));
 const Register = () => {
   const { form, onChange, onSubmit } = useForm();
   const { confirmPassword, email, name, password } = form;
@@ -46,13 +39,13 @@ const Register = () => {
   }
   return (
     <Fragment>
-      <section className={classes.section}>
+      <Section>
         <Title>
           Register <PersonIcon />
         </Title>
         <Text>Create an account</Text>
-      </section>
-      <section>
+      </Section>
+      <Section>
         <Form
           formItems={[
             {
@@ -95,7 +88,7 @@ const Register = () => {
             </Grid>
           }
         />
-      </section>
+      </Section>
     </Fragment>
   );
 };

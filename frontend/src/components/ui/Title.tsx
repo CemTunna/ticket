@@ -11,7 +11,7 @@ const useStyles = makeStyles()((theme) => ({
     textTransform: 'capitalize',
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.primary.light,
-    fontSize: '20px',
+    fontSize: '30px',
   },
 }));
 

@@ -12,14 +12,20 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { reset } from '../state/features/auth/authSlice';
 import Loader from '../components/ui/Loader';
-
+import TicketButton from '../components/ui/TicketButton';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Section from '../components/ui/Section';
 const useStyles = makeStyles()((theme) => ({
-  section: {
+  btnContainer: {
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
-    margin: '1rem',
+    justifyContent: 'center',
+  },
+  btn: {
+    marginTop: '2rem',
+  },
+  icon: {
+    marginLeft: '0.5rem',
   },
 }));
 const Login = () => {
@@ -49,13 +55,13 @@ const Login = () => {
   }
   return (
     <Fragment>
-      <section className={classes.section}>
+      <Section>
         <Title>
-          Login <LoginIcon />
+          Login <LoginIcon className={classes.icon} fontSize='large' />
         </Title>
         <Text>Log in to send ticket</Text>
-      </section>
-      <section>
+      </Section>
+      <Section>
         <Form
           formItems={[
             {
@@ -77,12 +83,14 @@ const Login = () => {
           ]}
           onSubmit={onSubmit}
           others={
-            <Grid>
-              <Button type='submit'>Submit</Button>
+            <Grid className={classes.btnContainer}>
+              <TicketButton type='submit' className={classes.btn}>
+                <ArrowForwardIosIcon />
+              </TicketButton>
             </Grid>
           }
         />
-      </section>
+      </Section>
     </Fragment>
   );
 };

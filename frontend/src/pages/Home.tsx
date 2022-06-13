@@ -9,6 +9,9 @@ import TicketLink from '../components/ui/TicketLink';
 const useStyles = makeStyles()((theme) => ({
   text: {
     justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '1rem',
+    },
   },
   title: {
     justifyContent: 'center',
@@ -56,7 +59,7 @@ const Home = () => {
         </TicketLink>
 
         <TicketLink to='/tickets' className={classes.card}>
-          Open tickets
+          View tickets
         </TicketLink>
       </Grid>
     </Fragment>
