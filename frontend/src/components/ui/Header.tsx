@@ -6,6 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import PersonIcon from '@mui/icons-material/Person';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { logoutStart, reset } from '../../state/features/auth/authSlice';
+import TicketLink from './TicketLink';
 
 const useStyles = makeStyles()((theme) => ({
   header: {
@@ -13,23 +14,27 @@ const useStyles = makeStyles()((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: theme.palette.secondary.main,
-    padding: '0 0.5rem',
+    padding: '1rem',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+    },
   },
   list: {
     display: 'flex',
     letterSpacing: '0.5px',
+
+    [theme.breakpoints.down('sm')]: {},
   },
   listitem: {
     display: 'flex',
     alignItems: 'center',
-
     textDecoration: 'none',
     color: theme.palette.primary.light,
   },
   logo: {
     textDecoration: 'none',
     letterSpacing: '0.5px',
-    fontSize: '25px',
+    fontSize: '40px',
     color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightBold,
     textTransform: 'uppercase',
@@ -65,14 +70,14 @@ const Header = () => {
         ) : (
           <>
             <ListItem>
-              <Link to='/login' className={classes.listitem}>
+              <TicketLink to='/login' className={classes.listitem}>
                 Login <LoginIcon className={classes.icon} />
-              </Link>
+              </TicketLink>
             </ListItem>
             <ListItem>
-              <Link to='/register' className={classes.listitem}>
+              <TicketLink to='/register' className={classes.listitem}>
                 Register <PersonIcon className={classes.icon} />
-              </Link>
+              </TicketLink>
             </ListItem>
           </>
         )}

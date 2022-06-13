@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
+import { ChildrenClassName } from '../../interfaces/ui';
 
-interface Props {
-  children: React.ReactNode;
-}
 const useStyles = makeStyles()((theme) => ({
   container: {
     marginTop: '1rem',
@@ -11,7 +9,7 @@ const useStyles = makeStyles()((theme) => ({
     textAlign: 'center',
   },
 }));
-const Section = ({ children }: Props) => {
+const Section = ({ children }: ChildrenClassName) => {
   const { classes } = useStyles();
 
   return <section className={classes.container}>{children}</section>;

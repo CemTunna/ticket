@@ -1,10 +1,9 @@
 import { Typography } from '@mui/material';
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
+import classNames from 'classnames';
+import { ChildrenClassName } from '../../interfaces/ui';
 
-interface Props {
-  children: React.ReactNode;
-}
 const useStyles = makeStyles()((theme) => ({
   text: {
     letterSpacing: '0.5px',
@@ -16,10 +15,18 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const Text = ({ children }: Props) => {
+const Text = ({ className, children }: ChildrenClassName) => {
   const { classes } = useStyles();
 
-  return <Typography className={classes.text}>{children}</Typography>;
+  return (
+    <Typography
+      className={
+        !className ? classes.text : classNames(className, classes.text)
+      }
+    >
+      {children}
+    </Typography>
+  );
 };
 
 export default Text;

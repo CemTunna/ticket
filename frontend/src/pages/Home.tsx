@@ -7,6 +7,12 @@ import { Grid } from '@mui/material';
 import TicketLink from '../components/ui/TicketLink';
 
 const useStyles = makeStyles()((theme) => ({
+  text: {
+    justifyContent: 'center',
+  },
+  title: {
+    justifyContent: 'center',
+  },
   card: {
     flex: 1,
     height: '20rem',
@@ -18,11 +24,13 @@ const useStyles = makeStyles()((theme) => ({
     borderRadius: '24px',
     transition: 'all .2s ease-out',
     fontSize: '30px',
-    '&:active': {
+    color: theme.palette.primary.main,
+    '&:hover': {
       transform: 'rotate(-20deg)',
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: '20px',
+      height: '10rem',
     },
   },
   bodyContainer: {
@@ -37,8 +45,10 @@ const Home = () => {
   return (
     <Fragment>
       <Section>
-        <Title>Do you need help from support service ? </Title>
-        <Text>Select what you want to do </Text>
+        <Title className={classes.title}>
+          Do you need help from support service ?{' '}
+        </Title>
+        <Text className={classes.text}>Select what you want to do </Text>
       </Section>
       <Grid className={classes.bodyContainer}>
         <TicketLink to='/createTicket' className={classes.card}>
