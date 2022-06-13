@@ -30,8 +30,11 @@ const getTicket = asyncHandler(async (req, res) => {
 
 const createTicket = asyncHandler(async (req, res) => {
   const { issue, description } = req.body;
-  if (!issue || !description) {
+  if (!issue) {
     return res.status(400).json({ msg: 'Please add issue title' });
+  }
+  if (!description) {
+    return res.status(400).json({ msg: 'Please add issue description' });
   }
   const user = await User.findById(req.user.id);
   if (!user) {

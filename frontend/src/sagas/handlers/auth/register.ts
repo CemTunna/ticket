@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { register } from '../requests/auth/register';
+import { register } from '../../requests/auth/register';
 
 function* handleRegister(action: any): any {
   try {

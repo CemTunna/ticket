@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { logout } from '../requests/auth/logout';
+import { logout } from '../../requests/auth/logout';
 
 function* handleLogout(): any {
   try {
