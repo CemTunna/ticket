@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import React, { Fragment, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Text from '../components/ui/Text';
 import Title from '../components/ui/Title';
@@ -83,6 +83,7 @@ const CreateTicket = () => {
           <button type='submit'>submit</button>
         </form>
       </section>
+      <Link to='/'>Back</Link>
     </Fragment>
   );
 };

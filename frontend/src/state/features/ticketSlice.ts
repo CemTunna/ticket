@@ -31,23 +31,26 @@ export const ticketSlice = createSlice({
       state.isError = true;
       state.msg = action.payload;
     },
-  },
 
-  // logoutStart: (state) => {
-  //   state.isLoading = true;
-  // },
-  // logoutSuccess: (state) => {
-  //   state.isLoading = false;
-  //   state.isSuccess = true;
-  //   state.user = null;
-  // },
-  // logoutFailed: (state, action) => {
-  //   state.isLoading = false;
-  //   state.isError = true;
-  //   state.msg = action.payload;
-  // },
+    getTicketsStart: (state, action) => {
+      state.isLoading = true;
+    },
+    getTicketsSuccess: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.tickets = action.payload;
+    },
+    getTicketsFailed: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.msg = action.payload;
+    },
+  },
 });
 export const {
+  getTicketsFailed,
+  getTicketsStart,
+  getTicketsSuccess,
   createTicketFailed,
   createTicketStart,
   createTicketSuccess,

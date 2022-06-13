@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CreateTicket from './pages/CreateTicket';
 import PrivateRoute from './components/PrivateRoute';
+import Tickets from './pages/Tickets';
 const App = () => {
   return (
     <React.Fragment>
@@ -22,6 +23,9 @@ const App = () => {
             <Route path='/register' element={<Register />} />
             <Route path='/createTicket' element={<PrivateRoute />}>
               <Route path='/createTicket' element={<CreateTicket />} />
+            </Route>
+            <Route path='/tickets' element={<PrivateRoute />}>
+              <Route path='/tickets' element={<Tickets />} />
             </Route>
           </Routes>
         </div>

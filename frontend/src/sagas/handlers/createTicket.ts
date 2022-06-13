@@ -3,7 +3,6 @@ import { createTicket } from '../requests/ticket/createTicket';
 
 function* handleCreateTicket(action: any): any {
   const { ticketFormData, token } = action.payload;
-  console.log(ticketFormData, token);
 
   try {
     const response = yield call(createTicket, ticketFormData, token);
