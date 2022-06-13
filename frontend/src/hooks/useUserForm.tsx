@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAppDispatch } from '../state/hooks';
+import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { loginStart, registerStart } from '../state/features/auth/authSlice';
-const useForm = () => {
+const useUserForm = () => {
   const dispatch = useAppDispatch();
+  const { isError, isLoading, isSuccess, msg, user } = useAppSelector(
+    (state) => state.auth
+  );
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -52,7 +55,12 @@ const useForm = () => {
     setForm,
     onChange,
     onSubmit,
+    isError,
+    isLoading,
+    isSuccess,
+    msg,
+    user,
   };
 };
 
-export default useForm;
+export default useUserForm;

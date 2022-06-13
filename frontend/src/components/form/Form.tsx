@@ -5,7 +5,7 @@ import { makeStyles } from 'tss-react/mui';
 interface Props {
   formItems: any;
   onSubmit: (e: any) => void;
-  others: any;
+  submitButton: any;
 }
 const useStyles = makeStyles()((theme) => ({
   form: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
 }));
-const Form = ({ onSubmit, formItems, others }: Props) => {
+const Form = ({ onSubmit, formItems, submitButton }: Props) => {
   const { classes } = useStyles();
 
   return (
@@ -25,7 +25,7 @@ const Form = ({ onSubmit, formItems, others }: Props) => {
       {formItems.map((item: any) => (
         <FormItem item={item} key={item.id} />
       ))}
-      {others}
+      {submitButton}
     </form>
   );
 };

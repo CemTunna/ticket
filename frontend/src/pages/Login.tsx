@@ -1,7 +1,4 @@
-import { Button, Grid } from '@mui/material';
 import { Fragment, useEffect } from 'react';
-import PersonIcon from '@mui/icons-material/Person';
-import useForm from '../hooks/useForm';
 import Form from '../components/form/Form';
 import { makeStyles } from 'tss-react/mui';
 import Title from '../components/ui/Title';
@@ -12,33 +9,22 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { reset } from '../state/features/auth/authSlice';
 import Loader from '../components/ui/Loader';
-import TicketButton from '../components/ui/TicketButton';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Section from '../components/ui/Section';
+import useUserForm from '../hooks/useUserForm';
+import FormSubmitButton from '../components/form/FormSubmitButton';
 const useStyles = makeStyles()((theme) => ({
-  btnContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btn: {
-    marginTop: '2rem',
-  },
   icon: {
     marginLeft: '0.5rem',
   },
 }));
 const Login = () => {
-  const { form, onChange, onSubmit } = useForm();
+  const { form, onChange, onSubmit, isError, isLoading, isSuccess, msg, user } =
+    useUserForm();
   const { email, password } = form;
   const { classes } = useStyles();
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const { isError, isLoading, isSuccess, msg, user } = useAppSelector(
-    (state) => state.auth
-  );
 
   useEffect(() => {
     if (isError) {
@@ -82,13 +68,7 @@ const Login = () => {
             },
           ]}
           onSubmit={onSubmit}
-          others={
-            <Grid className={classes.btnContainer}>
-              <TicketButton type='submit' className={classes.btn}>
-                <ArrowForwardIosIcon />
-              </TicketButton>
-            </Grid>
-          }
+          submitButton={<FormSubmitButton />}
         />
       </Section>
     </Fragment>

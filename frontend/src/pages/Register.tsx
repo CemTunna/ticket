@@ -1,7 +1,6 @@
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Fragment, useEffect } from 'react';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import useForm from '../hooks/useForm';
 import Form from '../components/form/Form';
 import { makeStyles } from 'tss-react/mui';
 import Title from '../components/ui/Title';
@@ -12,22 +11,24 @@ import { useNavigate } from 'react-router-dom';
 import { reset } from '../state/features/auth/authSlice';
 import Loader from '../components/ui/Loader';
 import Section from '../components/ui/Section';
+import TicketButton from '../components/ui/TicketButton';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import useUserForm from '../hooks/useUserForm';
+import FormSubmitButton from '../components/form/FormSubmitButton';
+
 const useStyles = makeStyles()((theme) => ({
   icon: {
     marginLeft: '0.5rem',
   },
 }));
 const Register = () => {
-  const { form, onChange, onSubmit } = useForm();
+  const { form, onChange, onSubmit, isError, isLoading, isSuccess, msg, user } =
+    useUserForm();
   const { confirmPassword, email, name, password } = form;
   const { classes } = useStyles();
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const { isError, isLoading, isSuccess, msg, user } = useAppSelector(
-    (state) => state.auth
-  );
 
   useEffect(() => {
     if (isError) {
@@ -87,11 +88,7 @@ const Register = () => {
             },
           ]}
           onSubmit={onSubmit}
-          others={
-            <Grid>
-              <Button type='submit'>Submit</Button>
-            </Grid>
-          }
+          submitButton={<FormSubmitButton />}
         />
       </Section>
     </Fragment>
