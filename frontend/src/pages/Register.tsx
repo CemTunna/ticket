@@ -1,6 +1,6 @@
 import { Button, Grid } from '@mui/material';
 import { Fragment, useEffect } from 'react';
-import PersonIcon from '@mui/icons-material/Person';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import useForm from '../hooks/useForm';
 import Form from '../components/form/Form';
 import { makeStyles } from 'tss-react/mui';
@@ -12,7 +12,11 @@ import { useNavigate } from 'react-router-dom';
 import { reset } from '../state/features/auth/authSlice';
 import Loader from '../components/ui/Loader';
 import Section from '../components/ui/Section';
-const useStyles = makeStyles()((theme) => ({}));
+const useStyles = makeStyles()((theme) => ({
+  icon: {
+    marginLeft: '0.5rem',
+  },
+}));
 const Register = () => {
   const { form, onChange, onSubmit } = useForm();
   const { confirmPassword, email, name, password } = form;
@@ -41,7 +45,8 @@ const Register = () => {
     <Fragment>
       <Section>
         <Title>
-          Register <PersonIcon />
+          Register{' '}
+          <AppRegistrationIcon fontSize='large' className={classes.icon} />
         </Title>
         <Text>Create an account</Text>
       </Section>

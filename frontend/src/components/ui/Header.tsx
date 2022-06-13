@@ -3,10 +3,10 @@ import { makeStyles } from 'tss-react/mui';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Grid, List, ListItem } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
-import PersonIcon from '@mui/icons-material/Person';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { logoutStart, reset } from '../../state/features/auth/authSlice';
 import TicketLink from './TicketLink';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 const useStyles = makeStyles()((theme) => ({
   header: {
@@ -74,7 +74,7 @@ const Header = () => {
             </ListItem>
             <ListItem>
               <TicketLink to='/register' className={classes.listitem}>
-                Register <PersonIcon className={classes.icon} />
+                Register <AppRegistrationIcon className={classes.icon} />
               </TicketLink>
             </ListItem>
           </>
