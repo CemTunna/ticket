@@ -2,8 +2,6 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { getTickets } from '../requests/ticket/getTickets';
 
 function* handleGetTickets(action: any): any {
-  console.log('asd', action.payload);
-
   try {
     const response = yield call(getTickets, action.payload);
     if (response.data) {

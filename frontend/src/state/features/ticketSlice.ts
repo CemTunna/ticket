@@ -45,6 +45,20 @@ export const ticketSlice = createSlice({
       state.isError = true;
       state.msg = action.payload;
     },
+
+    getTicketStart: (state, action) => {
+      state.isLoading = true;
+    },
+    getTicketSuccess: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.ticket = action.payload;
+    },
+    getTicketFailed: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.msg = action.payload;
+    },
   },
 });
 export const {
@@ -55,5 +69,8 @@ export const {
   createTicketStart,
   createTicketSuccess,
   reset,
+  getTicketFailed,
+  getTicketStart,
+  getTicketSuccess,
 } = ticketSlice.actions;
 export default ticketSlice.reducer;
