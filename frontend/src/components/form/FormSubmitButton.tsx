@@ -19,7 +19,7 @@ const FormSubmitButton = () => {
   return (
     <Grid className={classes.btnContainer}>
       <TicketButton type='submit' className={classes.btn}>
-        <ArrowForwardIosIcon />
+        <ArrowForwardIosIcon fontSize='large' />
       </TicketButton>
     </Grid>
   );

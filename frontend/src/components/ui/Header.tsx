@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Grid, List, ListItem } from '@mui/material';
@@ -7,6 +6,8 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { logoutStart, reset } from '../../state/features/auth/authSlice';
 import TicketLink from './TicketLink';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import LogoutIcon from '@mui/icons-material/Logout';
+import IconButton from '@mui/material/IconButton';
 
 const useStyles = makeStyles()((theme) => ({
   header: {
@@ -40,6 +41,14 @@ const useStyles = makeStyles()((theme) => ({
   icon: {
     marginLeft: '0.2rem',
   },
+  iconbtn: {
+    color: theme.palette.primary.main,
+    transition: 'all .2s ease-out',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
+    },
+  },
 }));
 const Header = () => {
   const { classes } = useStyles();
@@ -64,7 +73,9 @@ const Header = () => {
       </Grid>
       <List className={classes.list}>
         {user ? (
-          <Button onClick={handleLogout}>Logout</Button>
+          <IconButton onClick={handleLogout} className={classes.iconbtn}>
+            <LogoutIcon fontSize='large' />
+          </IconButton>
         ) : (
           <>
             <ListItem>

@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Icon, IconButton } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -12,8 +12,13 @@ import Input from '../components/ui/Input';
 import { makeStyles } from 'tss-react/mui';
 import Form from '../components/form/Form';
 import FormSubmitButton from '../components/form/FormSubmitButton';
-
+import TicketLink from '../components/ui/TicketLink';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 const useStyles = makeStyles()((theme) => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   wrapper: {
     marginTop: '1rem',
     [theme.breakpoints.up('sm')]: {
@@ -23,6 +28,21 @@ const useStyles = makeStyles()((theme) => ({
   label: {
     color: theme.palette.primary.main,
     letterSpacing: '0.5px',
+  },
+  link: {
+    color: theme.palette.primary.main,
+    display: 'flex',
+    justifyContent: 'center',
+    paddingLeft: '1rem',
+    alignItems: 'center',
+    transition: 'all .2s ease-out',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
+    },
+  },
+  text: {
+    marginTop: '1rem',
   },
 }));
 const CreateTicket = () => {
@@ -65,10 +85,10 @@ const CreateTicket = () => {
     <Loader />;
   }
   return (
-    <Fragment>
+    <Grid className={classes.container}>
       <Section>
         <Title>Create New Ticket To Get Support</Title>
-        <Text>Fill the form</Text>
+        <Text className={classes.text}>Fill the form</Text>
       </Section>
       <Section>
         <Grid className={classes.wrapper}>
@@ -108,8 +128,18 @@ const CreateTicket = () => {
           submitButton={<FormSubmitButton />}
         />
       </Section>
-      <Link to='/'>Back</Link>
-    </Fragment>
+      <Link
+        to='/'
+        style={{
+          padding: '0',
+          alignSelf: 'flex-start',
+        }}
+      >
+        <IconButton className={classes.link}>
+          <ArrowBackIosIcon fontSize='large' />
+        </IconButton>
+      </Link>
+    </Grid>
   );
 };
 
