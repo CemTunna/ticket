@@ -11,6 +11,7 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     margin: '1rem',
+    border: '1px solid blue',
   },
 }));
 const Section = ({ children }: ChildrenClassName) => {
