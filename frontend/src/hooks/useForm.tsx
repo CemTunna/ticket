@@ -9,7 +9,6 @@ const useForm = () => {
   const { isError, isLoading, isSuccess, msg, user } = useAppSelector(
     (state) => state.auth
   );
-  const { token } = user;
 
   const [form, setForm] = useState({
     name: '',
@@ -68,8 +67,9 @@ const useForm = () => {
     }
     // Ticket sending
     const { description, issue } = ticketFormData;
-    if (description.length > 0 && issue.length > 0) {
-      dispatch(createTicketStart({ ticketFormData, token }));
+    if (description.length > 0 && issue.length > 0 && user.token.length > 0) {
+      const { token } = user;
+      token && dispatch(createTicketStart({ ticketFormData, token }));
     }
   };
   return {

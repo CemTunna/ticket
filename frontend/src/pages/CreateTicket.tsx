@@ -50,7 +50,9 @@ const CreateTicket = () => {
   const dispatch = useAppDispatch();
 
   const { classes } = useStyles();
+
   const { onTicketChange, ticketFormData, user, onSubmit } = useForm();
+
   const { isError, isLoading, isSuccess, msg } = useAppSelector(
     (state) => state.ticket
   );
@@ -64,6 +66,7 @@ const CreateTicket = () => {
       navigate('/tickets');
     }
     dispatch(reset());
+    //eslint-disable-next-line
   }, [isError, isSuccess]);
   if (isLoading) {
     <Loader />;

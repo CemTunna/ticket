@@ -59,6 +59,23 @@ export const ticketSlice = createSlice({
       state.isError = true;
       state.msg = action.payload;
     },
+
+    closeTicketStart: (state, action) => {
+      state.isLoading = true;
+    },
+    closeTicketSuccess: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.ticket = action.payload;
+      state.tickets.find((ticket) =>
+        ticket._id === action.payload._id ? (ticket.status = 'closed') : ticket
+      );
+    },
+    closeTicketFailed: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.msg = action.payload;
+    },
   },
 });
 export const {
@@ -72,5 +89,8 @@ export const {
   getTicketFailed,
   getTicketStart,
   getTicketSuccess,
+  closeTicketFailed,
+  closeTicketStart,
+  closeTicketSuccess,
 } = ticketSlice.actions;
 export default ticketSlice.reducer;

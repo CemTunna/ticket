@@ -35,7 +35,8 @@ const Login = () => {
       navigate('/');
     }
     dispatch(reset());
-  }, [isError, isSuccess, user, msg, dispatch, navigate]);
+    //eslint-disable-next-line
+  }, [isError, isSuccess, user, msg]);
   if (isLoading) {
     return <Loader />;
   }

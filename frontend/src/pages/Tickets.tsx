@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import Title from '../components/ui/Title';
 import { Grid } from '@mui/material';
+import Item from '../components/Item';
 const Tickets = () => {
   const { isLoading, isSuccess, isError, msg, tickets } = useAppSelector(
     (state) => state.ticket
@@ -25,16 +26,23 @@ const Tickets = () => {
     }
 
     dispatch(getTicketsStart(user.token));
-    dispatch(reset());
-  }, [dispatch]);
+    //eslint-disable-next-line
+  }, [isError]);
   if (isLoading) return <Loader />;
   return (
     <Fragment>
       <Title>Tickets</Title>
       <Grid>
-        {/* {tickets.map((ticket) => (
-          <TicketItem />
-        ))} */}
+        <Grid>
+          <div>Date</div>
+          <div>Issue</div>
+          <div>Status</div>
+          <div></div>
+        </Grid>
+
+        {tickets.map((ticket: any) => (
+          <Item key={ticket._id} ticket={ticket} />
+        ))}
       </Grid>
 
       <Link to='/'>Back</Link>

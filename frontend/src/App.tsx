@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import CreateTicket from './pages/CreateTicket';
 import PrivateRoute from './components/PrivateRoute';
 import Tickets from './pages/Tickets';
+import Ticket from './pages/Ticket';
 const App = () => {
   return (
     <React.Fragment>
@@ -26,6 +27,9 @@ const App = () => {
             </Route>
             <Route path='/tickets' element={<PrivateRoute />}>
               <Route path='/tickets' element={<Tickets />} />
+            </Route>
+            <Route path='/ticket/:id' element={<PrivateRoute />}>
+              <Route path='/ticket/:id' element={<Ticket />} />
             </Route>
           </Routes>
         </div>

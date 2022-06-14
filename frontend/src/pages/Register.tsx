@@ -1,18 +1,16 @@
-import { Grid } from '@mui/material';
 import { Fragment, useEffect } from 'react';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import Form from '../components/form/Form';
 import { makeStyles } from 'tss-react/mui';
 import Title from '../components/ui/Title';
 import Text from '../components/ui/Text';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
+import { useAppDispatch } from '../state/hooks';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { reset } from '../state/features/auth/authSlice';
 import Loader from '../components/ui/Loader';
 import Section from '../components/ui/Section';
-import TicketButton from '../components/ui/TicketButton';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 import useForm from '../hooks/useForm';
 import FormSubmitButton from '../components/form/FormSubmitButton';
 
@@ -38,6 +36,7 @@ const Register = () => {
       navigate('/');
     }
     dispatch(reset());
+    //eslint-disable-next-line
   }, [isError, isSuccess, user, msg, dispatch, navigate]);
   if (isLoading) {
     return <Loader />;

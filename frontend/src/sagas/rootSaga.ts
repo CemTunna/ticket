@@ -5,6 +5,7 @@ import watcherLogoutSaga from './handlers/auth/logout';
 import watcherCreateTicketSaga from './handlers/createTicket';
 import watcherGetTicketsSaga from './handlers/getTickets';
 import watcherGetTicketSaga from './handlers/getTicket';
+import watcherCloseTicketSaga from './handlers/closeTicket';
 
 export default function* rootSaga() {
   yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     watcherLoginSaga(),
     watcherGetTicketsSaga(),
     watcherGetTicketSaga(),
+    watcherCloseTicketSaga(),
   ]);
 }

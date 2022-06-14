@@ -6,6 +6,7 @@ function* handleGetTicket(action: any): any {
 
   try {
     const response = yield call(getTicket, id, token);
+
     if (response.data) {
       yield put({ type: 'ticket/getTicketSuccess', payload: response.data });
     }
