@@ -14,11 +14,10 @@ const useStyles = makeStyles()((theme) => ({
   },
   inputWrapper: {
     width: '100%',
+    letterSpacing: '0.5px',
   },
   input: {
-    WebkitBoxShadow: '0 0 0 1000px #46344e inset',
-    color: '#F5F5F5',
-    letterSpacing: '0.5px',
+    WebkitBoxShadow: '0 0 0 1000px white inset',
   },
 }));
 const FormItem = ({ item }: Props) => {
