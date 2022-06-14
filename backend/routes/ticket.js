@@ -10,6 +10,10 @@ const {
 
 const router = express.Router();
 
+const noteRouter = require('./note');
+
+router.use('/:id/notes', noteRouter);
+
 const setProtect = require('../middlewares/authMiddleware');
 
 router.route('/').get(setProtect, getTickets).post(setProtect, createTicket);
