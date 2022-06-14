@@ -12,9 +12,13 @@ const useStyles = makeStyles()((theme) => ({
       width: '30rem',
     },
   },
-  input: {
-    letterSpacing: '0.5px',
+  inputWrapper: {
     width: '100%',
+  },
+  input: {
+    WebkitBoxShadow: '0 0 0 1000px #46344e inset',
+    color: '#F5F5F5',
+    letterSpacing: '0.5px',
   },
 }));
 const FormItem = ({ item }: Props) => {
@@ -24,10 +28,8 @@ const FormItem = ({ item }: Props) => {
   return (
     <Grid className={classes.item}>
       <TextField
-        sx={{
-          color: 'red',
-        }}
-        className={classes.input}
+        inputProps={{ className: classes.input }}
+        className={classes.inputWrapper}
         id={id}
         name={name}
         value={value}

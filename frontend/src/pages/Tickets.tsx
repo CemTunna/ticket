@@ -31,7 +31,6 @@ const Tickets = () => {
   return (
     <Fragment>
       <Title>Tickets</Title>
-
       <Grid>
         {/* {tickets.map((ticket) => (
           <TicketItem />
