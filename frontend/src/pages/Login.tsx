@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { reset } from '../state/features/auth/authSlice';
 import Loader from '../components/ui/Loader';
 import Section from '../components/ui/Section';
-import useUserForm from '../hooks/useUserForm';
+import useForm from '../hooks/useForm';
 import FormSubmitButton from '../components/form/FormSubmitButton';
 const useStyles = makeStyles()((theme) => ({
   icon: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 const Login = () => {
   const { form, onChange, onSubmit, isError, isLoading, isSuccess, msg, user } =
-    useUserForm();
+    useForm();
   const { email, password } = form;
   const { classes } = useStyles();
 

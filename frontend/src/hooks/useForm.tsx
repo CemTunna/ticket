@@ -2,21 +2,38 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { loginStart, registerStart } from '../state/features/auth/authSlice';
-const useUserForm = () => {
+import { createTicketStart } from '../state/features/ticketSlice';
+const useForm = () => {
   const dispatch = useAppDispatch();
+
   const { isError, isLoading, isSuccess, msg, user } = useAppSelector(
     (state) => state.auth
   );
+  const { token } = user;
+
   const [form, setForm] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
+  const [ticketFormData, setTicketFormData] = useState({
+    issue: '',
+    description: '',
+  });
+
   const { password, confirmPassword, name, email } = form;
+
   const onChange = (e: any) => {
     setForm((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
   };
+  const onTicketChange = (e: any) => {
+    setTicketFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const onSubmit = (e: any) => {
     e.preventDefault();
 
@@ -49,10 +66,17 @@ const useUserForm = () => {
       };
       dispatch(loginStart(data));
     }
+    // Ticket sending
+    const { description, issue } = ticketFormData;
+    if (description.length > 0 && issue.length > 0) {
+      dispatch(createTicketStart({ ticketFormData, token }));
+    }
   };
   return {
     form,
     setForm,
+    onTicketChange,
+    ticketFormData,
     onChange,
     onSubmit,
     isError,
@@ -63,4 +87,4 @@ const useUserForm = () => {
   };
 };
 
-export default useUserForm;
+export default useForm;

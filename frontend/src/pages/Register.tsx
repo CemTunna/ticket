@@ -13,7 +13,7 @@ import Loader from '../components/ui/Loader';
 import Section from '../components/ui/Section';
 import TicketButton from '../components/ui/TicketButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import useUserForm from '../hooks/useUserForm';
+import useForm from '../hooks/useForm';
 import FormSubmitButton from '../components/form/FormSubmitButton';
 
 const useStyles = makeStyles()((theme) => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles()((theme) => ({
 }));
 const Register = () => {
   const { form, onChange, onSubmit, isError, isLoading, isSuccess, msg, user } =
-    useUserForm();
+    useForm();
   const { confirmPassword, email, name, password } = form;
   const { classes } = useStyles();
 

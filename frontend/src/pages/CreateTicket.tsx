@@ -1,10 +1,10 @@
-import { Grid, Icon, IconButton } from '@mui/material';
-import { Fragment, useEffect, useState } from 'react';
+import { Grid, IconButton } from '@mui/material';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Text from '../components/ui/Text';
 import Title from '../components/ui/Title';
-import { createTicketStart, reset } from '../state/features/ticketSlice';
+import { reset } from '../state/features/ticketSlice';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import Loader from '../components/ui/Loader';
 import Section from '../components/ui/Section';
@@ -12,8 +12,8 @@ import Input from '../components/ui/Input';
 import { makeStyles } from 'tss-react/mui';
 import Form from '../components/form/Form';
 import FormSubmitButton from '../components/form/FormSubmitButton';
-import TicketLink from '../components/ui/TicketLink';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import useForm from '../hooks/useForm';
 const useStyles = makeStyles()((theme) => ({
   container: {
     display: 'flex',
@@ -46,31 +46,15 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 const CreateTicket = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const { classes } = useStyles();
-  const { user } = useAppSelector((state) => state.auth);
+  const { onTicketChange, ticketFormData, user, onSubmit } = useForm();
   const { isError, isLoading, isSuccess, msg } = useAppSelector(
     (state) => state.ticket
   );
 
-  const [name] = useState(user.name);
-  const [email] = useState(user.email);
-  const [ticketFormData, setTicketFormData] = useState({
-    issue: '',
-    description: '',
-  });
-  const { token } = user;
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-    dispatch(createTicketStart({ ticketFormData, token }));
-  };
-  const onChange = (e: any) => {
-    setTicketFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   useEffect(() => {
     if (isError) {
       toast.error(msg);
@@ -95,13 +79,19 @@ const CreateTicket = () => {
           <label className={classes.label} htmlFor='name'>
             Name
           </label>
-          <Input type='text' value={name} name='name' id='name' readOnly />
+          <Input type='text' value={user.name} name='name' id='name' readOnly />
         </Grid>
         <Grid className={classes.wrapper}>
           <label className={classes.label} htmlFor='email'>
             Email
           </label>
-          <Input type='text' name='email' value={email} id='email' readOnly />
+          <Input
+            type='text'
+            name='email'
+            value={user.email}
+            id='email'
+            readOnly
+          />
         </Grid>
       </Section>
       <Section>
@@ -110,7 +100,7 @@ const CreateTicket = () => {
             {
               value: ticketFormData.issue,
               name: 'issue',
-              onChange,
+              onChange: onTicketChange,
               type: 'text',
               id: 'issue',
               placeholder: 'Issue Title',
@@ -118,7 +108,7 @@ const CreateTicket = () => {
             {
               value: ticketFormData.description,
               name: 'description',
-              onChange,
+              onChange: onTicketChange,
               id: 'description',
               placeholder: 'Issue Description',
               multiline: true,
