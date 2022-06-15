@@ -2,10 +2,11 @@ import { all } from 'redux-saga/effects';
 import watcherLoginSaga from './handlers/auth/login';
 import watcherRegisterSaga from './handlers/auth/register';
 import watcherLogoutSaga from './handlers/auth/logout';
-import watcherCreateTicketSaga from './handlers/createTicket';
-import watcherGetTicketsSaga from './handlers/getTickets';
-import watcherGetTicketSaga from './handlers/getTicket';
-import watcherCloseTicketSaga from './handlers/closeTicket';
+import watcherCreateTicketSaga from './handlers/ticket/createTicket';
+import watcherGetTicketsSaga from './handlers/ticket/getTickets';
+import watcherGetTicketSaga from './handlers/ticket/getTicket';
+import watcherCloseTicketSaga from './handlers/ticket/closeTicket';
+import watcherGetNotesSaga from './handlers/note/getNotes';
 
 export default function* rootSaga() {
   yield all([
@@ -16,5 +17,6 @@ export default function* rootSaga() {
     watcherGetTicketsSaga(),
     watcherGetTicketSaga(),
     watcherCloseTicketSaga(),
+    watcherGetNotesSaga(),
   ]);
 }

@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { closeTicket } from '../requests/ticket/closeTicket';
+import { closeTicket } from '../../requests/ticket/closeTicket';
 
 function* handleCloseTicket(action: any): any {
   const { id, token } = action.payload;

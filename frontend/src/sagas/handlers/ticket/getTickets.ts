@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { getTickets } from '../requests/ticket/getTickets';
+import { getTickets } from '../../requests/ticket/getTickets';
 
 function* handleGetTickets(action: any): any {
   try {

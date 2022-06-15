@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { createTicket } from '../requests/ticket/createTicket';
+import { createTicket } from '../../requests/ticket/createTicket';
 
 function* handleCreateTicket(action: any): any {
   const { ticketFormData, token } = action.payload;
