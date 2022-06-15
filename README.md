@@ -12,8 +12,8 @@ create their tickets and notes about what they want or view all tickets and clos
 
 - REST API
 - Fully responsive
-- Authentication,
-- CRUD operations,
+- Authentication
+- CRUD operations
 
 
 
