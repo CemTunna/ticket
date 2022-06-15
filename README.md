@@ -4,15 +4,15 @@ Support Provider Via Tickets
 
 
 ## Overview
-Users can create tickets about product's problem. Users can login, register,
-create their tickets, view all tickets or close tickets. CRUD operations are made for tickets.
+Users are able to create tickets about product's problem and leave notes. They can login, register,
+create their tickets and notes about what they want or view all tickets and close tickets.
  
 
 ## Features
 
 - REST API
 - Fully responsive
-- Protected routes,
+- Authentication,
 - CRUD operations,
 
 
