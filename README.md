@@ -19,7 +19,7 @@ create their tickets, view all tickets or close tickets. CRUD operations are mad
 
 ## Tech Stack
 
-**Client:** React, Redux-Toolkit, Redux-Saga,  Material UI, JSS,
+**Client:** React, Typescript, Redux-Toolkit, Redux-Saga,  Material UI, JSS,
 
 **Backend:** Node.js, Express.js, MongoDB, Mongoose 
 
