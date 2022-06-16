@@ -12,7 +12,6 @@ import Input from '../components/ui/Input';
 import { makeStyles } from 'tss-react/mui';
 import Form from '../components/form/Form';
 import FormSubmitButton from '../components/form/FormSubmitButton';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import useForm from '../hooks/useForm';
 import BackButton from '../components/ui/BackButton';
 const useStyles = makeStyles()((theme) => ({

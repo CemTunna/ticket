@@ -15,6 +15,7 @@ import { Button, Grid, Typography } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import classNames from 'classnames';
 import BackButton from '../components/ui/BackButton';
+import NoteItem from '../components/NoteItem';
 
 const useStyles = makeStyles()((theme) => ({
   text: {
@@ -135,8 +136,11 @@ const Ticket = () => {
               {ticket.description}
             </Typography>
           </Grid>
+          <Typography className={classes.text}>Notes</Typography>
         </header>
-        {/* {notes.map(note=><NoteItem/>)} */}
+        {notes.map((note: any) => (
+          <NoteItem note={note} key={note._id} />
+        ))}
         {ticket.status !== 'closed' && (
           <Button className={classes.btn} onClick={onClose}>
             Close ticket
