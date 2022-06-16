@@ -1,8 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ClientTicket, DatabaseTicket } from '../../interfaces/Ticket';
+interface InitialState {
+  tickets: DatabaseTicket[];
+  ticket: ClientTicket;
+  isError: boolean;
+  isSuccess: boolean;
+  isLoading: boolean;
+  msg: string;
+}
 
-const initialState = {
+const initialState: InitialState = {
   tickets: [],
-  ticket: {},
+  ticket: {
+    issue: '',
+    description: '',
+  },
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -18,52 +30,61 @@ export const ticketSlice = createSlice({
       state.isLoading = false;
       state.msg = '';
     },
-    createTicketStart: (state, action) => {
+    createTicketStart: (
+      state,
+      action: PayloadAction<{ ticketFormData: ClientTicket; token: string }>
+    ) => {
       state.isLoading = true;
     },
-    createTicketSuccess: (state, action) => {
+    createTicketSuccess: (state, action: PayloadAction<DatabaseTicket>) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.ticket = action.payload;
     },
-    createTicketFailed: (state, action) => {
+    createTicketFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isError = true;
       state.msg = action.payload;
     },
 
-    getTicketsStart: (state, action) => {
+    getTicketsStart: (state, action: PayloadAction<{ token: string }>) => {
       state.isLoading = true;
     },
-    getTicketsSuccess: (state, action) => {
+    getTicketsSuccess: (state, action: PayloadAction<DatabaseTicket[]>) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.tickets = action.payload;
     },
-    getTicketsFailed: (state, action) => {
+    getTicketsFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isError = true;
       state.msg = action.payload;
     },
 
-    getTicketStart: (state, action) => {
+    getTicketStart: (
+      state,
+      action: PayloadAction<{ token: string; id: string }>
+    ) => {
       state.isLoading = true;
     },
-    getTicketSuccess: (state, action) => {
+    getTicketSuccess: (state, action: PayloadAction<DatabaseTicket>) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.ticket = action.payload;
     },
-    getTicketFailed: (state, action) => {
+    getTicketFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isError = true;
       state.msg = action.payload;
     },
 
-    closeTicketStart: (state, action) => {
+    closeTicketStart: (
+      state,
+      action: PayloadAction<{ token: string; id: string }>
+    ) => {
       state.isLoading = true;
     },
-    closeTicketSuccess: (state, action) => {
+    closeTicketSuccess: (state, action: PayloadAction<DatabaseTicket>) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.ticket = action.payload;
@@ -71,7 +92,7 @@ export const ticketSlice = createSlice({
         ticket._id === action.payload._id ? (ticket.status = 'closed') : ticket
       );
     },
-    closeTicketFailed: (state, action) => {
+    closeTicketFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isError = true;
       state.msg = action.payload;

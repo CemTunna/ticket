@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { loginStart, registerStart } from '../state/features/auth/authSlice';
 import { createTicketStart } from '../state/features/ticketSlice';
+import { ClientTicket } from '../interfaces/Ticket';
 const useForm = () => {
   const dispatch = useAppDispatch();
 
@@ -16,7 +16,7 @@ const useForm = () => {
     password: '',
     confirmPassword: '',
   });
-  const [ticketFormData, setTicketFormData] = useState({
+  const [ticketFormData, setTicketFormData] = useState<ClientTicket>({
     issue: '',
     description: '',
   });
