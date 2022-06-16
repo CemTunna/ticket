@@ -4,16 +4,16 @@ Support Provider Via Tickets
 
 
 ## Overview
-Users can create tickets about product's problem. Users can login, register,
-create their tickets, view all tickets or close tickets. CRUD operations are made for tickets.
+Users are able to create tickets about product's problem and leave notes. They can login, register,
+create their tickets and notes about what they want or view all tickets and close tickets.
  
 
 ## Features
 
 - REST API
 - Fully responsive
-- Protected routes,
-- CRUD operations,
+- Authentication
+- CRUD operations
 
 
 
@@ -26,8 +26,6 @@ create their tickets, view all tickets or close tickets. CRUD operations are mad
 **Server:** Heroku
 
 
-## Badges
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
  
 
