@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -28,13 +28,14 @@ const Ticket = () => {
   const navigate = useNavigate();
 
   const { id } = params;
-  console.log(id);
+
   useEffect(() => {
     if (isError) {
       toast.error(msg);
     }
-    dispatch(getTicketStart({ id, token }));
+    id && dispatch(getTicketStart({ id, token }));
     dispatch(getNotesStart({ id, token }));
+
     //eslint-disable-next-line
   }, [isError, id, msg, token]);
 
@@ -42,7 +43,7 @@ const Ticket = () => {
   if (notesLoading) return <Loader />;
 
   const onClose = () => {
-    dispatch(closeTicketStart({ token, id }));
+    id && dispatch(closeTicketStart({ token, id }));
     toast.success('ticket successfully closed');
     navigate('/tickets');
   };
