@@ -31,6 +31,7 @@ const useForm = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+    console.log(ticketFormData);
   };
 
   const onSubmit = (e: any) => {
@@ -67,6 +68,7 @@ const useForm = () => {
     }
     // Ticket sending
     const { description, issue } = ticketFormData;
+    console.log('ss', description, issue);
     if (description.length > 0 && issue.length > 0 && user.token.length > 0) {
       const { token } = user;
       token && dispatch(createTicketStart({ ticketFormData, token }));

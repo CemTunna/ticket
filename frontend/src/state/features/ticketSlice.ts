@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ClientTicket, DatabaseTicket } from '../../interfaces/Ticket';
 interface InitialState {
   tickets: DatabaseTicket[];
-  ticket: ClientTicket;
+  ticket: DatabaseTicket;
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
@@ -14,6 +14,11 @@ const initialState: InitialState = {
   ticket: {
     issue: '',
     description: '',
+    _id: '',
+    createdAt: '',
+    status: '',
+    updatedAt: '',
+    user: '',
   },
   isError: false,
   isSuccess: false,

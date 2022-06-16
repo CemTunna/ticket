@@ -54,6 +54,7 @@ const Tickets = () => {
     }
 
     dispatch(getTicketsStart(user.token));
+    dispatch(reset());
     //eslint-disable-next-line
   }, [isError]);
   if (isLoading) return <Loader />;
