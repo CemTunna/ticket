@@ -14,6 +14,7 @@ import Form from '../components/form/Form';
 import FormSubmitButton from '../components/form/FormSubmitButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import useForm from '../hooks/useForm';
+import BackButton from '../components/ui/BackButton';
 const useStyles = makeStyles()((theme) => ({
   container: {
     display: 'flex',
@@ -29,18 +30,7 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.primary.main,
     letterSpacing: '0.5px',
   },
-  link: {
-    color: theme.palette.primary.main,
-    display: 'flex',
-    justifyContent: 'center',
-    paddingLeft: '1rem',
-    alignItems: 'center',
-    transition: 'all .2s ease-out',
-    '&:hover': {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.secondary.main,
-    },
-  },
+
   text: {
     marginTop: '1rem',
   },
@@ -121,17 +111,7 @@ const CreateTicket = () => {
           submitButton={<FormSubmitButton />}
         />
       </Section>
-      <Link
-        to='/'
-        style={{
-          padding: '0',
-          alignSelf: 'flex-start',
-        }}
-      >
-        <IconButton className={classes.link}>
-          <ArrowBackIosIcon fontSize='large' />
-        </IconButton>
-      </Link>
+      <BackButton path='/' />
     </Grid>
   );
 };

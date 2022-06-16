@@ -3,12 +3,12 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import Loader from '../components/ui/Loader';
 import { getTicketsStart, reset } from '../state/features/ticketSlice';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 import Title from '../components/ui/Title';
 import { Grid, List } from '@mui/material';
 import Item from '../components/Item';
 import { makeStyles } from 'tss-react/mui';
 import Text from '../components/ui/Text';
+import BackButton from '../components/ui/BackButton';
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -74,7 +74,7 @@ const Tickets = () => {
         </List>
       </Grid>
 
-      <Link to='/'>Back</Link>
+      <BackButton path='/' />
     </Fragment>
   );
 };

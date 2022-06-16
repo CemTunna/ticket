@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -13,15 +13,10 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import Loader from '../components/ui/Loader';
 import { Button, Grid, Typography } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
-import Title from '../components/ui/Title';
 import classNames from 'classnames';
+import BackButton from '../components/ui/BackButton';
 
 const useStyles = makeStyles()((theme) => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1rem',
-  },
   text: {
     color: theme.palette.primary.light,
     letterSpace: '0.5px',
@@ -55,6 +50,7 @@ const useStyles = makeStyles()((theme) => ({
     lineHeight: theme.typography.pxToRem(23.87),
     fontWeight: theme.typography.fontWeightMedium,
     padding: '0.5rem 2rem',
+    marginLeft: '1rem',
     backgroundColor: theme.palette.primary.main,
     transition: 'all .2s ease-out',
     border: '1px solid transparent',
@@ -108,35 +104,42 @@ const Ticket = () => {
   };
 
   return (
-    <Grid className={classes.container}>
-      <header>
-        {/* back btn */}
-        <Typography className={classes.text}>Ticket ID: {id} </Typography>
-        <Typography
-          className={
-            ticket.status === 'closed'
-              ? classNames(classes.text, classes.closed)
-              : classNames(classes.text, classes.new)
-          }
-        >
-          {ticket.status}
-        </Typography>
-        <Typography className={classes.text}>
-          Date submitted: {new Date(ticket.createdAt).toLocaleString('en-US')}
-        </Typography>
-        <hr />
-        <div>
-          <Typography className={classes.text}>Description of Issue</Typography>
-          <Typography className={classes.text}>{ticket.description}</Typography>
-        </div>
-      </header>
-      {/* {notes.map(note=><NoteItem/>)} */}
-      {ticket.status !== 'closed' && (
-        <Button className={classes.btn} onClick={onClose}>
-          Close ticket
-        </Button>
-      )}
-    </Grid>
+    <Fragment>
+      <Grid style={{ marginBottom: '18rem' }}>
+        <header>
+          {/* back btn */}
+          <Typography className={classes.text}>Ticket ID: {id} </Typography>
+          <Typography
+            className={
+              ticket.status === 'closed'
+                ? classNames(classes.text, classes.closed)
+                : classNames(classes.text, classes.new)
+            }
+          >
+            {ticket.status}
+          </Typography>
+          <Typography className={classes.text}>
+            Date submitted: {new Date(ticket.createdAt).toLocaleString('en-US')}
+          </Typography>
+          <hr />
+          <div>
+            <Typography className={classes.text}>
+              Description of Issue
+            </Typography>
+            <Typography className={classes.text}>
+              {ticket.description}
+            </Typography>
+          </div>
+        </header>
+        {/* {notes.map(note=><NoteItem/>)} */}
+        {ticket.status !== 'closed' && (
+          <Button className={classes.btn} onClick={onClose}>
+            Close ticket
+          </Button>
+        )}
+      </Grid>
+      <BackButton path='/tickets' />
+    </Fragment>
   );
 };
 
