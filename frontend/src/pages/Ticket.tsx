@@ -30,7 +30,7 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '2rem',
+    width: '10rem',
   },
   new: {
     color: theme.palette.primary.light,
@@ -63,6 +63,12 @@ const useStyles = makeStyles()((theme) => ({
       padding: '0.5rem 1rem',
     },
   },
+  desc: {
+    backgroundColor: theme.palette.secondary.light,
+    padding: '0.5rem',
+    margin: '1rem',
+    borderRadius: '10px',
+  },
 }));
 const Ticket = () => {
   const { classes } = useStyles();
@@ -90,7 +96,7 @@ const Ticket = () => {
     }
     id && dispatch(getTicketStart({ id, token }));
     dispatch(getNotesStart({ id, token }));
-
+    dispatch(notesReset());
     //eslint-disable-next-line
   }, [isError, id, msg, token]);
 
@@ -105,9 +111,8 @@ const Ticket = () => {
 
   return (
     <Fragment>
-      <Grid style={{ marginBottom: '18rem' }}>
+      <Grid style={{ marginBottom: '4rem' }}>
         <header>
-          {/* back btn */}
           <Typography className={classes.text}>Ticket ID: {id} </Typography>
           <Typography
             className={
@@ -122,14 +127,14 @@ const Ticket = () => {
             Date submitted: {new Date(ticket.createdAt).toLocaleString('en-US')}
           </Typography>
           <hr />
-          <div>
+          <Grid className={classes.desc}>
             <Typography className={classes.text}>
               Description of Issue
             </Typography>
             <Typography className={classes.text}>
               {ticket.description}
             </Typography>
-          </div>
+          </Grid>
         </header>
         {/* {notes.map(note=><NoteItem/>)} */}
         {ticket.status !== 'closed' && (
