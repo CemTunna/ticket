@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import Loader from '../components/ui/Loader';
 import { getTicketsStart, reset } from '../state/features/ticketSlice';
@@ -68,9 +68,13 @@ const Tickets = () => {
           <Text className={classes.text}>Status</Text>
         </Grid>
         <List className={classes.list}>
-          {tickets.map((ticket: any) => (
-            <Item key={ticket._id} ticket={ticket} />
-          ))}
+          {tickets.length > 0 ? (
+            tickets.map((ticket: any) => (
+              <Item key={ticket._id} ticket={ticket} />
+            ))
+          ) : (
+            <Title>No Tickets</Title>
+          )}
         </List>
       </Grid>
 

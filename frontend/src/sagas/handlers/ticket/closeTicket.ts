@@ -6,7 +6,7 @@ function* handleCloseTicket(action: any): any {
 
   try {
     const response = yield call(closeTicket, id, token);
-    console.log('asd', response);
+
     if (response.data) {
       yield put({ type: 'ticket/closeTicketSuccess', payload: response.data });
     }
