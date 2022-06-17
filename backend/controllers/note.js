@@ -13,7 +13,7 @@ const getNotes = asyncHandler(async (req, res) => {
   }
   const ticket = await Ticket.findById(req.params.id);
   if (ticket.user.toString() !== req.user.id) {
-    return res.status(401).json({ msg: 'user npt authorized' });
+    return res.status(401).json({ msg: 'user not authorized' });
   }
 
   const notes = await Note.find({ ticket: req.params.id });
@@ -30,8 +30,9 @@ const createNote = asyncHandler(async (req, res) => {
   }
   const ticket = await Ticket.findById(req.params.id);
   if (ticket.user.toString() !== req.user.id) {
-    return res.status(401).json({ msg: 'user npt authorized' });
+    return res.status(401).json({ msg: 'user not authorized' });
   }
+  console.log('from back', req.user.id, 'ticket_id:', ticket._id);
   const note = await Note.create({
     text,
     user: req.user.id,

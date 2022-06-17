@@ -7,6 +7,7 @@ import watcherGetTicketsSaga from './handlers/ticket/getTickets';
 import watcherGetTicketSaga from './handlers/ticket/getTicket';
 import watcherCloseTicketSaga from './handlers/ticket/closeTicket';
 import watcherGetNotesSaga from './handlers/note/getNotes';
+import watcherCreateNotesSaga from './handlers/note/createNote';
 
 export default function* rootSaga() {
   yield all([
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     watcherGetTicketSaga(),
     watcherCloseTicketSaga(),
     watcherGetNotesSaga(),
+    watcherCreateNotesSaga(),
   ]);
 }

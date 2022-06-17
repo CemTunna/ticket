@@ -27,6 +27,7 @@ export const noteSlice = createSlice({
     },
 
     createNotesStart: (state, action) => {
+      console.log('starti', action);
       state.isLoading = true;
     },
     createNotesSuccess: (state, action) => {

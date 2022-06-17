@@ -3,7 +3,6 @@ import { getNotes } from '../../requests/note/getNotes';
 
 function* handleGetNotes(action: any): any {
   const { id, token } = action.payload;
-  console.log('action', action);
   try {
     const response = yield call(getNotes, id, token);
     if (response.data) {

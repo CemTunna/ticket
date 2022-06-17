@@ -8,6 +8,7 @@ import {
 import {
   reset as notesReset,
   getNotesStart,
+  createNotesStart,
 } from '../state/features/noteSlice';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import Loader from '../components/ui/Loader';
@@ -121,7 +122,7 @@ const Ticket = () => {
   }
   const onNoteSubmit = (e: any) => {
     e.preventDefault();
-    console.log('submit');
+    dispatch(createNotesStart({ text: noteText, id, token }));
     closeModal();
   };
   return (
