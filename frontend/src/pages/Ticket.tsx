@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -16,6 +16,7 @@ import { makeStyles } from 'tss-react/mui';
 import classNames from 'classnames';
 import BackButton from '../components/ui/BackButton';
 import NoteItem from '../components/NoteItem';
+import TicketModal from '../components/TicketModal';
 
 const useStyles = makeStyles()((theme) => ({
   text: {
@@ -74,6 +75,9 @@ const useStyles = makeStyles()((theme) => ({
 const Ticket = () => {
   const { classes } = useStyles();
 
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [noteText, setNoteText] = React.useState('');
+
   const { isError, msg, isLoading, ticket } = useAppSelector(
     (state) => state.ticket
   );
@@ -109,7 +113,17 @@ const Ticket = () => {
     toast.success('ticket successfully closed');
     navigate('/tickets');
   };
-
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
+  const onNoteSubmit = (e: any) => {
+    e.preventDefault();
+    console.log('submit');
+    closeModal();
+  };
   return (
     <Fragment>
       <Grid style={{ marginBottom: '4rem' }}>
@@ -138,6 +152,31 @@ const Ticket = () => {
           </Grid>
           <Typography className={classes.text}>Notes</Typography>
         </header>
+        {ticket.status !== 'closed' && (
+          <button onClick={openModal}>Add Note</button>
+        )}
+        <TicketModal
+          isOpen={modalIsOpen}
+          openModal={openModal}
+          closeModal={closeModal}
+        >
+          <h2>Add note</h2>
+          <button onClick={closeModal}>Close modal</button>
+          <form onSubmit={onNoteSubmit}>
+            <div>
+              <textarea
+                onChange={(e) => setNoteText(e.target.value)}
+                name='noteText'
+                id='noteText'
+                placeholder='Note text'
+                value={noteText}
+              ></textarea>
+            </div>
+            <div>
+              <button type='submit'>submit</button>
+            </div>
+          </form>
+        </TicketModal>
         {notes.map((note: any) => (
           <NoteItem note={note} key={note._id} />
         ))}
