@@ -32,7 +32,6 @@ const createNote = asyncHandler(async (req, res) => {
   if (ticket.user.toString() !== req.user.id) {
     return res.status(401).json({ msg: 'user not authorized' });
   }
-  console.log('from back', req.user.id, 'ticket_id:', ticket._id);
   const note = await Note.create({
     text,
     user: req.user.id,

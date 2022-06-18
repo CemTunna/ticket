@@ -19,7 +19,8 @@ import BackButton from '../components/ui/BackButton';
 import NoteItem from '../components/NoteItem';
 import TicketModal from '../components/TicketModal';
 import useForm from '../hooks/useForm';
-
+import { DatabaseNote } from '../interfaces/Note';
+import useModal from '../hooks/useModal';
 const useStyles = makeStyles()((theme) => ({
   text: {
     color: theme.palette.primary.light,
@@ -77,7 +78,7 @@ const useStyles = makeStyles()((theme) => ({
 const Ticket = () => {
   const { classes } = useStyles();
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const { closeModal, openModal, modalIsOpen } = useModal();
 
   const { setNoteText, noteText } = useForm();
 
@@ -85,9 +86,12 @@ const Ticket = () => {
     (state) => state.ticket
   );
 
-  const { isLoading: notesLoading, notes } = useAppSelector(
-    (state) => state.note
-  );
+  const {
+    msg: notesMsg,
+    isLoading: notesLoading,
+    notes,
+    isError: notesError,
+  } = useAppSelector((state) => state.note);
 
   const {
     user: { token },
@@ -101,6 +105,9 @@ const Ticket = () => {
   useEffect(() => {
     if (isError) {
       toast.error(msg);
+    }
+    if (notesError) {
+      toast.error(notesMsg);
     }
     id && dispatch(getTicketStart({ id, token }));
     id && dispatch(getNotesStart({ id, token }));
@@ -116,17 +123,13 @@ const Ticket = () => {
     toast.success('ticket successfully closed');
     navigate('/tickets');
   };
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
+
   const onNoteSubmit = (e: any) => {
     e.preventDefault();
     id && dispatch(createNotesStart({ noteText, id, token }));
     closeModal();
   };
+
   return (
     <Fragment>
       <Grid style={{ marginBottom: '4rem' }}>
@@ -185,7 +188,7 @@ const Ticket = () => {
             </div>
           </form>
         </TicketModal>
-        {notes.map((note: any) => (
+        {notes.map((note: DatabaseNote) => (
           <NoteItem note={note} key={note._id} />
         ))}
         {ticket.status !== 'closed' && (
