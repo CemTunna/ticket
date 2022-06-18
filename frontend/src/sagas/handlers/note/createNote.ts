@@ -2,7 +2,11 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { createNotes } from '../../requests/note/createNote';
 
 function* handleCreateNotes(action: any): any {
-  const { id, token, text } = action.payload;
+  const {
+    id,
+    token,
+    noteText: { text },
+  } = action.payload;
 
   try {
     const response = yield call(createNotes, id, text, token);

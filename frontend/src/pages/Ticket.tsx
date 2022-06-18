@@ -86,12 +86,9 @@ const Ticket = () => {
     (state) => state.ticket
   );
 
-  const {
-    msg: notesMsg,
-    isLoading: notesLoading,
-    notes,
-    isError: notesError,
-  } = useAppSelector((state) => state.note);
+  const { isLoading: notesLoading, notes } = useAppSelector(
+    (state) => state.note
+  );
 
   const {
     user: { token },
@@ -106,9 +103,7 @@ const Ticket = () => {
     if (isError) {
       toast.error(msg);
     }
-    if (notesError) {
-      toast.error(notesMsg);
-    }
+
     id && dispatch(getTicketStart({ id, token }));
     id && dispatch(getNotesStart({ id, token }));
     dispatch(notesReset());
@@ -172,10 +167,9 @@ const Ticket = () => {
             <div>
               <textarea
                 onChange={(e) =>
-                  setNoteText((prevState) => ({
-                    ...prevState,
+                  setNoteText({
                     text: e.target.value,
-                  }))
+                  })
                 }
                 name='noteText'
                 id='noteText'
