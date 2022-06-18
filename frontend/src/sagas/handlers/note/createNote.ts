@@ -3,10 +3,10 @@ import { createNotes } from '../../requests/note/createNote';
 
 function* handleCreateNotes(action: any): any {
   const { id, token, text } = action.payload;
-  console.log('notes action', action);
+
   try {
     const response = yield call(createNotes, id, text, token);
-    console.log('resss', response);
+
     if (response.data) {
       yield put({ type: 'note/createNotesSuccess', payload: response.data });
     }

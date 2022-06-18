@@ -18,6 +18,7 @@ import classNames from 'classnames';
 import BackButton from '../components/ui/BackButton';
 import NoteItem from '../components/NoteItem';
 import TicketModal from '../components/TicketModal';
+import useForm from '../hooks/useForm';
 
 const useStyles = makeStyles()((theme) => ({
   text: {
@@ -77,7 +78,8 @@ const Ticket = () => {
   const { classes } = useStyles();
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [noteText, setNoteText] = React.useState('');
+
+  const { setNoteText, noteText } = useForm();
 
   const { isError, msg, isLoading, ticket } = useAppSelector(
     (state) => state.ticket
@@ -101,7 +103,7 @@ const Ticket = () => {
       toast.error(msg);
     }
     id && dispatch(getTicketStart({ id, token }));
-    dispatch(getNotesStart({ id, token }));
+    id && dispatch(getNotesStart({ id, token }));
     dispatch(notesReset());
     //eslint-disable-next-line
   }, [isError, id, msg, token]);
@@ -122,7 +124,7 @@ const Ticket = () => {
   }
   const onNoteSubmit = (e: any) => {
     e.preventDefault();
-    dispatch(createNotesStart({ text: noteText, id, token }));
+    id && dispatch(createNotesStart({ noteText, id, token }));
     closeModal();
   };
   return (
@@ -166,11 +168,16 @@ const Ticket = () => {
           <form onSubmit={onNoteSubmit}>
             <div>
               <textarea
-                onChange={(e) => setNoteText(e.target.value)}
+                onChange={(e) =>
+                  setNoteText((prevState) => ({
+                    ...prevState,
+                    text: e.target.value,
+                  }))
+                }
                 name='noteText'
                 id='noteText'
                 placeholder='Note text'
-                value={noteText}
+                value={noteText.text}
               ></textarea>
             </div>
             <div>
