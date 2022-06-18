@@ -42,19 +42,16 @@ const Tickets = () => {
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    return () => {
-      if (isSuccess) {
-        dispatch(reset());
-      }
-    };
-  }, [isSuccess, dispatch]);
+    if (isSuccess) {
+      dispatch(reset());
+    }
+  }, [isSuccess]);
   useEffect(() => {
     if (isError) {
       toast.error(msg);
     }
-
     dispatch(getTicketsStart(user.token));
-    dispatch(reset());
+
     //eslint-disable-next-line
   }, [isError]);
   if (isLoading) return <Loader />;

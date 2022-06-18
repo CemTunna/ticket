@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import {
   closeTicketStart,
   getTicketStart,
+  reset as ticketReset,
 } from '../../state/features/ticketSlice';
 import {
   reset as notesReset,
@@ -102,13 +103,19 @@ const Ticket = () => {
 
   const { setNoteText, noteText } = useForm();
 
-  const { isError, msg, isLoading, ticket } = useAppSelector(
-    (state) => state.ticket
-  );
+  const {
+    isError,
+    msg,
+    isLoading,
+    ticket,
+    isSuccess: ticketSuccess,
+  } = useAppSelector((state) => state.ticket);
 
-  const { isLoading: notesLoading, notes } = useAppSelector(
-    (state) => state.note
-  );
+  const {
+    isLoading: notesLoading,
+    notes,
+    isSuccess: notesSuccess,
+  } = useAppSelector((state) => state.note);
 
   const {
     user: { token },
@@ -120,13 +127,22 @@ const Ticket = () => {
   const { id } = params;
 
   useEffect(() => {
+    if (ticketSuccess) {
+      dispatch(ticketReset());
+    }
+    if (notesSuccess) {
+      dispatch(notesReset());
+    }
+  }, [ticketSuccess, notesSuccess]);
+
+  useEffect(() => {
     if (isError) {
       toast.error(msg);
     }
 
     id && dispatch(getTicketStart({ id, token }));
     id && dispatch(getNotesStart({ id, token }));
-    dispatch(notesReset());
+
     //eslint-disable-next-line
   }, [isError, id, msg, token]);
 

@@ -19,7 +19,12 @@ export const noteSlice = createSlice({
   name: 'note',
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isError = false;
+      state.isSuccess = false;
+      state.isLoading = false;
+      state.msg = '';
+    },
     getNotesStart: (
       state,
       action: PayloadAction<{ id: string; token: string }>
