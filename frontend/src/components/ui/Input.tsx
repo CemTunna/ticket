@@ -42,7 +42,7 @@ const Input = ({
   return (
     <TextField
       multiline={multiline && multiline}
-      rows={multiline ? 10 : 0}
+      rows={10}
       label={label && labelTag && labelTag}
       inputProps={{ className: classes.input, readOnly: readOnly && readOnly }}
       type={type && type}

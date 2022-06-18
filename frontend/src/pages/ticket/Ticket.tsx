@@ -4,28 +4,30 @@ import { toast } from 'react-toastify';
 import {
   closeTicketStart,
   getTicketStart,
-} from '../state/features/ticketSlice';
+} from '../../state/features/ticketSlice';
 import {
   reset as notesReset,
   getNotesStart,
   createNotesStart,
-} from '../state/features/noteSlice';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
-import Loader from '../components/ui/Loader';
+} from '../../state/features/noteSlice';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import Loader from '../../components/ui/Loader';
 import { Button, Grid, Typography } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import classNames from 'classnames';
-import BackButton from '../components/ui/BackButton';
-import NoteItem from '../components/NoteItem';
-import TicketModal from '../components/TicketModal';
-import useForm from '../hooks/useForm';
-import { DatabaseNote } from '../interfaces/Note';
-import useModal from '../hooks/useModal';
+import BackButton from '../../components/ui/BackButton';
+import NoteItem from './NoteItem';
+import TicketModal from './TicketModal';
+import useForm from '../../hooks/useForm';
+import { DatabaseNote } from '../../interfaces/Note';
+import useModal from '../../hooks/useModal';
+import Text from '../../components/ui/Text';
+import Input from '../../components/ui/Input';
 const useStyles = makeStyles()((theme) => ({
   text: {
     color: theme.palette.primary.light,
     letterSpace: '0.5px',
-    margin: '1rem',
+    margin: '0.5rem',
   },
   closed: {
     color: theme.palette.primary.light,
@@ -73,6 +75,24 @@ const useStyles = makeStyles()((theme) => ({
     padding: '0.5rem',
     margin: '1rem',
     borderRadius: '10px',
+  },
+  noteBtn: {
+    margin: '1rem',
+    width: '100%',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  sectionGroup: {
+    backgroundColor: theme.palette.primary.dark,
+    padding: '0.5rem',
+    borderRadius: '10px',
+    margin: ' 1rem 0 ',
+  },
+  title: {
+    fontSize: '20px',
+    color: theme.palette.primary.main,
   },
 }));
 const Ticket = () => {
@@ -144,28 +164,43 @@ const Ticket = () => {
           </Typography>
           <hr />
           <Grid className={classes.desc}>
-            <Typography className={classes.text}>
-              Description of Issue
-            </Typography>
-            <Typography className={classes.text}>
-              {ticket.description}
-            </Typography>
+            <Grid className={classes.sectionGroup}>
+              <Typography className={classNames(classes.text, classes.title)}>
+                Title of Issue
+              </Typography>
+              <Typography className={classes.text}>{ticket.issue}</Typography>
+            </Grid>
+            <Grid className={classes.sectionGroup}>
+              <Typography className={classNames(classes.text, classes.title)}>
+                Description of Issue
+              </Typography>
+              <Typography className={classes.text}>
+                {ticket.description}
+              </Typography>
+            </Grid>
           </Grid>
           <Typography className={classes.text}>Notes</Typography>
         </header>
         {ticket.status !== 'closed' && (
-          <button onClick={openModal}>Add Note</button>
+          <Grid style={{ display: 'flex' }}>
+            <Button
+              className={classNames(classes.btn, classes.noteBtn)}
+              onClick={openModal}
+            >
+              Add Note
+            </Button>
+          </Grid>
         )}
         <TicketModal
           isOpen={modalIsOpen}
           openModal={openModal}
           closeModal={closeModal}
         >
-          <h2>Add note</h2>
-          <button onClick={closeModal}>Close modal</button>
-          <form onSubmit={onNoteSubmit}>
-            <div>
-              <textarea
+          <Text>Add note</Text>
+          <form onSubmit={onNoteSubmit} className={classes.form}>
+            <Grid>
+              <Input
+                multiline
                 onChange={(e) =>
                   setNoteText({
                     text: e.target.value,
@@ -175,11 +210,16 @@ const Ticket = () => {
                 id='noteText'
                 placeholder='Note text'
                 value={noteText.text}
-              ></textarea>
-            </div>
-            <div>
-              <button type='submit'>submit</button>
-            </div>
+              ></Input>
+            </Grid>
+            <Grid style={{ display: 'flex' }}>
+              <Button
+                className={classNames(classes.btn, classes.noteBtn)}
+                type='submit'
+              >
+                Add
+              </Button>
+            </Grid>
           </form>
         </TicketModal>
         {notes.map((note: DatabaseNote) => (

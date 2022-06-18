@@ -10,8 +10,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CreateTicket from './pages/CreateTicket';
 import PrivateRoute from './components/PrivateRoute';
-import Tickets from './pages/Tickets';
-import Ticket from './pages/Ticket';
+import Tickets from './pages/tickets/Tickets';
+import Ticket from './pages/ticket/Ticket';
 const App = () => {
   return (
     <React.Fragment>

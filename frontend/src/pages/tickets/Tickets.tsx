@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../state/hooks';
-import Loader from '../components/ui/Loader';
-import { getTicketsStart, reset } from '../state/features/ticketSlice';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import Loader from '../../components/ui/Loader';
+import { getTicketsStart, reset } from '../../state/features/ticketSlice';
 import { toast } from 'react-toastify';
-import Title from '../components/ui/Title';
+import Title from '../../components/ui/Title';
 import { Grid, List } from '@mui/material';
-import Item from '../components/Item';
+import TicketItem from './TicketItem';
 import { makeStyles } from 'tss-react/mui';
-import Text from '../components/ui/Text';
-import BackButton from '../components/ui/BackButton';
+import Text from '../../components/ui/Text';
+import BackButton from '../../components/ui/BackButton';
 
 const useStyles = makeStyles()((theme) => ({
   container: {
@@ -70,7 +70,7 @@ const Tickets = () => {
         <List className={classes.list}>
           {tickets.length > 0 ? (
             tickets.map((ticket: any) => (
-              <Item key={ticket._id} ticket={ticket} />
+              <TicketItem key={ticket._id} ticket={ticket} />
             ))
           ) : (
             <Title>No Tickets</Title>
