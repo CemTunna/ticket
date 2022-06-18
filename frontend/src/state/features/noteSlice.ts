@@ -1,6 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ClientNote, DatabaseNote } from '../../interfaces/Note';
+interface InitialState {
+  notes: DatabaseNote[];
+  isError: boolean;
+  isSuccess: boolean;
+  isLoading: boolean;
+  msg: string;
+}
 
-const initialState = {
+const initialState: InitialState = {
   notes: [],
   isError: false,
   isSuccess: false,
@@ -12,30 +20,36 @@ export const noteSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => initialState,
-    getNotesStart: (state, action) => {
+    getNotesStart: (
+      state,
+      action: PayloadAction<{ id: string; token: string }>
+    ) => {
       state.isLoading = true;
     },
-    getNotesSuccess: (state, action) => {
+    getNotesSuccess: (state, action: PayloadAction<DatabaseNote[]>) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.notes = action.payload;
     },
-    getNotesFailed: (state, action) => {
+    getNotesFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isError = true;
       state.msg = action.payload;
     },
 
-    createNotesStart: (state, action) => {
-      console.log('starti', action);
+    createNotesStart: (
+      state,
+      action: PayloadAction<{ noteText: ClientNote; id: string; token: string }>
+    ) => {
+      console.log('start create note', action);
       state.isLoading = true;
     },
-    createNotesSuccess: (state, action) => {
+    createNotesSuccess: (state, action: PayloadAction<DatabaseNote>) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.notes.push(action.payload);
     },
-    createNotesFailed: (state, action) => {
+    createNotesFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isError = true;
       state.msg = action.payload;

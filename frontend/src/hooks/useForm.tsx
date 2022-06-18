@@ -7,8 +7,12 @@ const useForm = () => {
   const dispatch = useAppDispatch();
 
   const { isError, isLoading, isSuccess, msg, user } = useAppSelector(
-    (state) => state.auth
+    (state: any) => state.auth
   );
+
+  const [noteText, setNoteText] = useState({
+    text: '',
+  });
 
   const [form, setForm] = useState({
     name: '',
@@ -74,6 +78,8 @@ const useForm = () => {
     }
   };
   return {
+    setNoteText,
+    noteText,
     form,
     setForm,
     onTicketChange,
